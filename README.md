@@ -1,68 +1,96 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Intro to Redux
 
-## Available Scripts
+To demonstrate how Redux works, we'll build a simple counter app
 
-In the project directory, you can run:
+When working with redux:
+1. State *describe the ideal version of state*
 
-### `npm start`
+```javascript
+{
+    amount: 100
+}
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+If we  add 1 to the amount, what would state look like?
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```javascript
+{
+    amount: 101
+}
+```
 
-### `npm test`
+2. Action 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+```javascript
+{
+    type: 'INCREMENT'
+}
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```javascript
+{
+    type: 'DECREMENT'
+}
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```javascript
+{
+    type: '😎'
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+3. Reducer funtion *reducers are always named for the state they manage*
+- Redux will always give your reducers two things: current state + the action they're processing
+- They *must* return the new version of state 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```javascript
+function counter(state, action) {
+    // make a copy of state 
+    const newState = { ...state };
+    // modify that copy 
+    if (action.type === 'INCREMENT') {
+        newState.amount = state.amount + 1;
+    } else if (action.type === 'DECREMENT') {
+        newState.amount === state.amount -1;
+    } else {
+        // ... no need to do anything 
+        // we already made a copy of state to return, 
+        // just not changing it 
+    }
+    // return new version of state 
+    return newState;
+}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```npm i redux```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You give it a reducer, it gives you a store. A store is an object that manages your state using a reducer 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```javascript 
+const store = createStore(counter); 
+```
+4. "Push notifications" - subscribe to changes in the store 
+```javascript
+store.subscribe(() => {
+    console.log(`The state is now:`);
+    console.table(store.getState());
+}); 
+```
 
-## Learn More
+Let's give the store some actions to process 
+```javascript
+store.dispatch({
+    // hand it an action object
+    type: 'INCREMENT', 
+});
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Dispatches a couple more changes and confirms that state changes correctly!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![DEMO](Kapture-2020-02-11-at-17.04.00.gif)
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
