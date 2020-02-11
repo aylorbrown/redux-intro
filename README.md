@@ -66,6 +66,15 @@ function counter(state, action) {
 
 ```npm i redux```
 
+then 
+
+```javascript 
+import {
+    createStore
+} from 'redux';
+```
+
+
 You give it a reducer, it gives you a store. A store is an object that manages your state using a reducer 
 
 ```javascript 
@@ -89,7 +98,7 @@ store.dispatch({
 
 Dispatches a couple more changes and confirms that state changes correctly!
 
-![DEMO](Kapture-2020-02-11-at-17.04.00.gif)
+![DEMO](Kapture-2020-02-11-at-17.13.43.gif)
 
 
 
