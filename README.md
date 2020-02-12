@@ -2,7 +2,7 @@
 
 To demonstrate how Redux works, we'll build a simple counter app
 
-When working with redux:
+When working with Redux:
 1. State *describe the ideal version of state*
 
 ```javascript
@@ -89,6 +89,7 @@ store.subscribe(() => {
 ```
 
 Let's give the store some actions to process 
+
 ```javascript
 store.dispatch({
     // hand it an action object
@@ -99,6 +100,86 @@ store.dispatch({
 Dispatches a couple more changes and confirms that state changes correctly!
 
 ![DEMO](Kapture-2020-02-11-at-17.13.43.gif)
+
+
+
+if you want to change state so you can specify an amount, change the action 
+
+```javascript
+store.dispatch({
+    type: 'INCREMENT', 
+    amount: 5
+});
+```
+
+then also change the 1 in the counter function to ```action.amount```
+
+
+### Switch/Case
+
+You can replace if/elseif/else with switch/case:
+
+```javascript
+switch(action.type) {
+    case 'INCREMENT':
+        newState.amount = state.amount + action.amount;
+        break;
+    case 'DECREMENT':
+        newState.amount = state.amount - action.amount;
+        break;
+    default:
+        break;
+    }
+```
+
+so pretty! 
+
+![Solange](https://media.giphy.com/media/B7TfF28mxa6Ri/giphy.gif)
+
+
+### Stylistic things that will help you out later:
+
+1. Define your actions as constant (because you'll have typos eventually)
+
+```javascript
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT';
+```
+
+then use the const anywhere you want to refer to that action type!
+
+2. Write action creator functions. They format your action objects. Again, to avoid typos 
+
+```javascript 
+function actionIncrement() {
+    return {
+        type: INCREMENT, 
+        amount: 5
+    }
+}
+```
+
+```javascript
+store.dispatch(actionIncrement());
+```
+
+### How do you configure how much to increment/decrement?
+
+add ```howMuch``` as an argument to actionIncrement
+
+```javascript
+function actionIncrement(howMuch) {
+    return {
+        type: INCREMENT, 
+        amount: howMuch
+    }
+}
+```
+and pass a numberm in your dispatch 
+
+```javascript
+store.dispatch(actionIncrement(5));
+```
 
 
 

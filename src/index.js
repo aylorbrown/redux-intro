@@ -28,20 +28,51 @@ import {
     createStore
 } from 'redux';
 
+// create action types and constant so you get error message for typos
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT';
+
+
+// action creator functions! 
+function actionIncrement(howMuch) {
+    return {
+        type: INCREMENT, 
+        amount: howMuch
+    }
+}
+
+
+
 // The teller  - reducer function
-function counter(state={ amount: 100 }, action) {
+const defaultState = { amount: 100 };
+
+function counter(state=defaultState, action) {
     // make a copy of state 
     const newState = { ...state };
+
     // modify that copy 
-    if (action.type === 'INCREMENT') {
-        newState.amount = state.amount + 1;
-    } else if (action.type === 'DECREMENT') {
-        newState.amount = state.amount -1;
-    } else {
-        // ... no need to do anything 
-        // we already made a copy of state to return, 
-        // just not changing it 
+    switch(action.type) {
+        case INCREMENT:
+            newState.amount = state.amount + action.amount;
+            break;
+        case DECREMENT:
+            newState.amount = state.amount - action.amount;
+            break;
+        default:
+            break;
     }
+
+    // if (action.type === 'INCREMENT') {
+    //     newState.amount = state.amount + action.amount;
+    // } else if (action.type === 'DECREMENT') {
+    //     newState.amount = state.amount - action.amount;
+    // } else {
+    //     // ... no need to do anything 
+    //     // we already made a copy of state to return, 
+    //     // just not changing it 
+    // }
+
+
     // return new version of state 
     return newState;
 }
@@ -58,9 +89,7 @@ store.subscribe(() => {
 
 
 // Let's give the store some actions to process 
-store.dispatch({
-    type: '😜'
-});
+store.dispatch(actionIncrement(5));
 
 
 
