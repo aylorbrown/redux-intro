@@ -2,27 +2,26 @@
 
 // The bank - state
 
-// {
-//     amount: 100
-// }
 
-// {
-//     amount: 101
-// }
+// state version 1 
+{
+    amount1: 101, 
+    amount2: 3
+}
 
-// A transaction slip - action 
+// state version 2 
+{
+    amount1: 101, 
+    amount2: 4
+}
 
-// {
-//     type: 'INCREMENT'
-// }
+//  example action 
+{ 
+    type: 'INCREMENT', 
+    amount: 1, 
+    amountId: 'amount2'
+}
 
-// {
-//     type: 'DECREMENT'
-// }
-
-// {
-//     type: '😎'
-// }
 
 import {
     createStore
@@ -90,6 +89,9 @@ store.subscribe(() => {
 // Let's give the store some actions to process 
 store.dispatch(actionIncrement(5));
 store.dispatch(actionIncrement());
+
+
+
 
 
 

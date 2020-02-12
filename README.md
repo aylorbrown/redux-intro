@@ -201,4 +201,16 @@ will return 1
 
 
 
+### How would you handle state with 2 different amounts?
+
+### How would you handle state so that you could add and remove amounts, where each amount can be incremeneted and decremented?
+
+```javascript 
+const ADD_COUNTER = 'ADD_COUNTER';
+const DEL_COUNTER = 'DEL_COUNTER';
+```
+
+
+
+
 
