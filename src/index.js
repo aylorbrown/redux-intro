@@ -34,13 +34,12 @@ const DECREMENT = 'DECREMENT';
 
 
 // action creator functions! 
-function actionIncrement(howMuch) {
+function actionIncrement(howMuch=1) {
     return {
         type: INCREMENT, 
         amount: howMuch
     }
 }
-
 
 
 // The teller  - reducer function
@@ -90,6 +89,8 @@ store.subscribe(() => {
 
 // Let's give the store some actions to process 
 store.dispatch(actionIncrement(5));
+store.dispatch(actionIncrement());
+
 
 
 

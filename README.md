@@ -3,7 +3,7 @@
 To demonstrate how Redux works, we'll build a simple counter app
 
 When working with Redux:
-1. State *describe the ideal version of state*
+### State *describe the ideal version of state*
 
 ```javascript
 {
@@ -19,8 +19,7 @@ If we  add 1 to the amount, what would state look like?
 }
 ```
 
-2. Action 
-
+### Action 
 
 ```javascript
 {
@@ -41,7 +40,7 @@ If we  add 1 to the amount, what would state look like?
 ```
 
 
-3. Reducer funtion *reducers are always named for the state they manage*
+### Reducer function *reducers are always named for the state they manage*
 - Redux will always give your reducers two things: current state + the action they're processing
 - They *must* return the new version of state 
 
@@ -103,7 +102,8 @@ Dispatches a couple more changes and confirms that state changes correctly!
 
 
 
-if you want to change state so you can specify an amount, change the action 
+### What if you want to change the state so you can specify an amount?
+- Change the action! 
 
 ```javascript
 store.dispatch({
@@ -175,11 +175,29 @@ function actionIncrement(howMuch) {
     }
 }
 ```
-and pass a numberm in your dispatch 
+and pass a number in your dispatch 
 
 ```javascript
 store.dispatch(actionIncrement(5));
 ```
+
+
+### What if you want to make it so that if action creators don't pass a value, it will use the value 1?
+
+Pass a default value of 1 to the argument ```howMuch```
+
+```javascript
+function actionIncrement(howMuch=1) {
+    return {
+        type: INCREMENT, 
+        amount: howMuch
+    }
+}
+```
+
+```store.dispatch(actionIncrement());```
+will return 1 
+
 
 
 
